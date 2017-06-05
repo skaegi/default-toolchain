@@ -14,7 +14,7 @@ template:
     git url: >-
       [{{repository}}]({{repository}})
 toolchain:
-  name: '{{baseName}}-{{timestamp}}'
+  name: '{{form.pipeline.parameters.app-name}}'
   template:
     getting_started:
       $ref: '#/messages/toolchain.getting_started'
@@ -22,7 +22,7 @@ services:
   repo:
     service_id: hostedgit
     parameters:
-      repo_name: '{{toolchain.name}}'
+      repo_name: '{{form.pipeline.parameters.app-name}}'
       repo_url: '{{repository}}'
       type: clone
       has_issues: true
@@ -52,6 +52,6 @@ form:
       dev-region: '{{region}}'
       dev-organization: '{{organization}}'
       dev-space: dev
-      app-name: '{{services.repo.parameters.repo_name}}'
+      app-name: '{{baseName}}-{{timestamp}}'
     schema:
       $ref: deploy.json
